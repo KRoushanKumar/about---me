@@ -7,16 +7,18 @@ const bcrypt = require('bcrypt');
 
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-
+const PORT = 3001;
 
 
 const saltRound =10; 
 const db=mysql.createPool({
-    host:'localhost',
+    host:"localhost",
     user:'root',
     password:'',
-    database:'first'
+    database:'first',
+   // insecureAuth : true
 })
+//db.connect();
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET","POST","DELETE","PUT"],
@@ -136,7 +138,7 @@ app.post("/api/registration",(req,res)=>{
     
  });
 
-app.listen(3001,()=>{
-    console.log("running on port 3001");
+app.listen(process.env.PORT || PORT ,()=>{
+    console.log(`running on port ${PORT}  `);
 }
 )
